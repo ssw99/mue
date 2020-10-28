@@ -54,6 +54,7 @@
         "searchbar": {
             "title": "Search Bar",
             "search_engine": "Search Engine",
+            "show_suggestion": "Show Search Suggestions",
             "custom": "Custom Search URL"
         },
         "offline": "Offline Mode",

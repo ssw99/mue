@@ -68,6 +68,10 @@
         "value": "duckduckgo"
     },
     {
+        "name": "suggestion",
+        "value": true
+    },
+    {
         "name": "refresh",
         "value": true
     },

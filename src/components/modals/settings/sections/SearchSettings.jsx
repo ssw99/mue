@@ -3,6 +3,7 @@ import SettingsFunctions from '../../../../modules/settingsFunctions';
 import { toast } from 'react-toastify';
 import Section from '../Section';
 import Dropdown from '../Dropdown';
+import CheckBox from '../Checkbox';
 
 const searchEngines = require('../../../../modules/searchEngines.json');
 
@@ -43,6 +44,9 @@ export default class SearchSettings extends React.PureComponent {
           <ul id='searchEngineInput' style={{ display: 'none' }}>
             <p style={{ "marginTop": "0px" }}>{this.props.language.searchbar.custom} <span className='modalLink' onClick={() => this.resetSearch()}>{this.props.language.reset}</span></p>
             <input type='text' id='customSearchEngine'></input>
+          </ul>
+          <ul>
+            <CheckBox name="suggestion" text={this.props.language.searchbar.show_suggestion} />
           </ul>
         </Section>
       </React.Fragment>
