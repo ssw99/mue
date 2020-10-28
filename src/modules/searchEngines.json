@@ -2,47 +2,54 @@
     {
         "name": "DuckDuckGo",
         "settingsName": "duckduckgo",
-        "url": "https://duckduckgo.com"
+        "url": "https://duckduckgo.com/?q=",
+        "suggestionUrl": "https://ac.duckduckgo.com/ac/?type=list&q="
     },
     {
         "name": "Google",
         "settingsName": "google",
-        "url": "https://google.com/search"
+        "url": "https://google.com/search?q=",
+        "suggestionUrl": "suggestqueries.google.com/complete/search?client=chrome&q="
     },
     {
         "name": "Bing",
         "settingsName": "bing",
-        "url": "https://bing.com/search"
+        "url": "https://bing.com/search?q=",
+        "suggestionUrl": "https://www.bing.com/osjson.aspx?query="
     },
     {
         "name": "Yahoo",
         "settingsName": "yahoo",
-        "url": "https://search.yahoo.com/search"
+        "url": "https://search.yahoo.com/search?q="
     },
     {
         "name": "Ecosia",
         "settingsName": "ecosia",
-        "url": "https://ecosia.org/search"
+        "url": "https://ecosia.org/search?q=",
+        "suggestionUrl": "https://ac.ecosia.org/autocomplete?type=list&q="
     },
     {
         "name": "Яндекс",
         "settingsName": "yandex",
-        "url": "https://yandex.ru/search",
-        "query": "text"
+        "url": "https://yandex.ru/search?text=",
+        "suggestionUrl": "https://suggest.yandex.ru/suggest-ya.cgi?v=4&part="
     },
     {
         "name": "Qwant",
         "settingsName": "qwant",
-        "url": "https://www.quant.com/"
+        "url": "https://www.quant.com/?q=",
+        "suggestionUrl": "https://api.qwant.com/api/suggest/?client=opensearch&lang=en_gb&q="
     },
     {
         "name": "Ask",
         "settingsName": "ask",
-        "url": "https://ask.com/web"
+        "url": "https://ask.com/web?q=",
+        "suggestionUrl": "https://amg-ss.ask.com/query?q="
     },
     {
         "name": "Startpage",
         "settingsName": "startpage",
-        "url": "https://www.startpage.com/sp/search"
+        "url": "https://www.startpage.com/sp/search?q=",
+        "suggestionUrl": "https://www.startpage.com/do/suggest?format=json&query="
     }
 ]
