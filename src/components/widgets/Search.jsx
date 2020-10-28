@@ -8,57 +8,53 @@ export default class Search extends React.PureComponent {
   constructor(...args) {
     super(...args);
     this.state = {
-      url: '',
-      query: ''
+      searchBar: true,
+      searchEngine: {},
+      voiceSearch: false,
+      suggest: true,
     };
+  }
+
+  componentDidMount() {
+    const custom = localStorage.getItem('customSearchEngine');
+    const searchEngine = custom ?
+      { url: custom } :
+      searchEngines.find(i => i.settingsName === localStorage.getItem('searchEngine'));
+
+    this.setState({
+      searchBar: localStorage.getItem('searchBar') === 'true',
+      searchEngine,
+      voiceSearch: localStorage.getItem('voiceSearch') === 'true',
+      suggest: searchEngine.suggestionUrl && localStorage.getItem('suggestion') === 'true'
+    });
   }
 
   startSpeechRecognition() {
-    if (localStorage.getItem('voiceSearch') === 'false') return;
     const voiceSearch = new window.webkitSpeechRecognition();
     voiceSearch.start();
     voiceSearch.onresult = (event) => document.getElementById('searchtext').value = event.results[0][0].transcript;
-    voiceSearch.onend = () => setTimeout(() => window.location.href = this.state.url + `?${this.state.query}=` + document.getElementById('searchtext').value, 1000);
+    voiceSearch.onend = () => setTimeout(() => window.location.href = this.state.searchEngine.url + document.getElementById('searchtext').value, 1000);
   }
 
   render() {
-    if (localStorage.getItem('searchBar') === 'false') return null;
-
-    let url;
-    let query = 'q';
-
-    const setting = localStorage.getItem('searchEngine');
-    const info = searchEngines.find(i => i.settingsName === setting);
-    if (info !== undefined) {
-      url = info.url;
-      if (info.query) query = info.query;
-    }
-
-    const custom = localStorage.getItem('customSearchEngine');
-    if (custom) url = custom;
+    if (!this.state.searchBar) return null;
 
     const searchButton = () => {
       const value = document.getElementById('searchtext').value || 'mue fast';
-      window.location.href = url + `?${query}=` + value;
+      window.location.href = this.state.searchEngine.url + value;
     };
 
-    let microphone = null;
-    if (localStorage.getItem('voiceSearch') === 'true') {
-      this.setState({
-        url: url,
-        query: query
-      });
-      microphone = <MicIcon className='micIcon' onClick={() => this.startSpeechRecognition()}/>;
-    }
+    const microphone = this.voiceSearch ?
+      <MicIcon className='micIcon' onClick={() => this.startSpeechRecognition()} /> : null;
 
     return (
       <div id='searchBar' className='searchbar'>
-        <form id='searchBar' className='searchbarform' action={url}>
-            {microphone}
-            <SearchIcon onClick={() => searchButton()} id='searchButton' />
-            <input type='text' placeholder={this.props.language} name={query} id='searchtext' className='searchtext'/>
-            <div className='blursearcbBG'/>
-          </form>
+        {microphone}
+        <SearchIcon onClick={() => searchButton()} id='searchButton' />
+        <input type='text' id='searchtext' className='searchtext'
+          placeholder={this.props.language}
+          onKeyPress={(event) => { if (event.key == "Enter") searchButton() }}
+        />
       </div>
     );
   }
